@@ -1,0 +1,24 @@
+[22-Jan-2026 20:41:55 Asia/Jakarta] PHP Warning:  Constant ADMIN_KEY already defined in /home/tifj4825/public_html/rapip.tif-lbj.my.id/api_project_uas_mobut/games.php on line 8
+[22-Jan-2026 20:45:10 Asia/Jakarta] PHP Warning:  Constant ADMIN_KEY already defined in /home/tifj4825/public_html/rapip.tif-lbj.my.id/api_project_uas_mobut/games.php on line 8
+[22-Jan-2026 22:58:17 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'role' in 'SELECT' in /home/tifj4825/public_html/rapip.tif-lbj.my.id/api_project_uas_mobut/login.php:11
+Stack trace:
+#0 /home/tifj4825/public_html/rapip.tif-lbj.my.id/api_project_uas_mobut/login.php(11): mysqli->prepare()
+#1 {main}
+  thrown in /home/tifj4825/public_html/rapip.tif-lbj.my.id/api_project_uas_mobut/login.php on line 11
+[22-Jan-2026 22:58:23 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'role' in 'SELECT' in /home/tifj4825/public_html/rapip.tif-lbj.my.id/api_project_uas_mobut/login.php:11
+Stack trace:
+#0 /home/tifj4825/public_html/rapip.tif-lbj.my.id/api_project_uas_mobut/login.php(11): mysqli->prepare()
+#1 {main}
+  thrown in /home/tifj4825/public_html/rapip.tif-lbj.my.id/api_project_uas_mobut/login.php on line 11
+[22-Jan-2026 23:04:52 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'role' in 'SELECT' in /home/tifj4825/public_html/rapip.tif-lbj.my.id/api_project_uas_mobut/login.php:15
+Stack trace:
+#0 /home/tifj4825/public_html/rapip.tif-lbj.my.id/api_project_uas_mobut/login.php(15): mysqli->prepare()
+#1 {main}
+  thrown in /home/tifj4825/public_html/rapip.tif-lbj.my.id/api_project_uas_mobut/login.php on line 15
+[22-Jan-2026 23:41:45 Asia/Jakarta] PHP Warning:  Constant ADMIN_KEY already defined in /home/tifj4825/public_html/rapip.tif-lbj.my.id/api_project_uas_mobut/admin_key.php on line 2
+[22-Jan-2026 23:41:53 Asia/Jakarta] PHP Warning:  Constant ADMIN_KEY already defined in /home/tifj4825/public_html/rapip.tif-lbj.my.id/api_project_uas_mobut/admin_key.php on line 2
+[22-Jan-2026 23:55:55 Asia/Jakarta] PHP Warning:  Constant ADMIN_KEY already defined in /home/tifj4825/public_html/rapip.tif-lbj.my.id/api_project_uas_mobut/admin_key.php on line 2
+[22-Jan-2026 23:56:03 Asia/Jakarta] PHP Warning:  Constant ADMIN_KEY already defined in /home/tifj4825/public_html/rapip.tif-lbj.my.id/api_project_uas_mobut/admin_key.php on line 2
+[23-Jan-2026 00:35:31 Asia/Jakarta] PHP Warning:  Constant ADMIN_KEY already defined in /home/tifj4825/public_html/rapip.tif-lbj.my.id/api_project_uas_mobut/admin_key.php on line 2
+[23-Jan-2026 00:36:01 Asia/Jakarta] PHP Warning:  Constant ADMIN_KEY already defined in /home/tifj4825/public_html/rapip.tif-lbj.my.id/api_project_uas_mobut/admin_key.php on line 2
+[23-Jan-2026 00:36:13 Asia/Jakarta] PHP Warning:  Constant ADMIN_KEY already defined in /home/tifj4825/public_html/rapip.tif-lbj.my.id/api_project_uas_mobut/admin_key.php on line 2
