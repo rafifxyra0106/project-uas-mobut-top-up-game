@@ -9,7 +9,7 @@ class SessionService {
   }) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('logged_in', true);
-    await prefs.setInt('user_id', userId); // ✅ INT
+    await prefs.setInt('user_id', userId); 
     await prefs.setString('name', name);
     await prefs.setString('role', role);
     await prefs.setString('token', token);
@@ -22,7 +22,7 @@ class SessionService {
 
   static Future<int> getUserId() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getInt('user_id') ?? 0; // ✅ INT
+    return prefs.getInt('user_id') ?? 0; 
   }
 
   static Future<String> getName() async {
