@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../api/api_service.dart';
 
-/// ✅ GANTI background login pakai url gambar kamu sendiri
 const String REGISTER_BG_URL = 'https://rapip.tif-lbj.my.id/uploads/register_bg.jpg';
 
 class RegisterPage extends StatefulWidget {
@@ -116,7 +115,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         const SizedBox(height: 14),
 
-                        // ✅ Form-field kamu tetap, hanya style warna putih
                         TextField(
                           controller: nameC,
                           style: const TextStyle(color: Colors.white),
