@@ -7,7 +7,6 @@ import '../user/user_shell.dart';
 
 import 'register_page.dart';
 
-/// ✅ GANTI background login pakai url gambar kamu sendiri
 const String LOGIN_BG_URL = 'https://rapip.tif-lbj.my.id/uploads/login_bgML.jpg';
 
 class LoginPage extends StatefulWidget {
@@ -55,8 +54,7 @@ class _LoginPageState extends State<LoginPage> {
       final userId = (user['id'] as num).toInt();
       final name = (user['name'] ?? 'User').toString();
       final role = (user['role'] ?? 'user').toString();
-
-      // ✅ simpan session
+      
       await SessionService.saveSession(
         userId: userId,
         name: name,
@@ -70,7 +68,6 @@ class _LoginPageState extends State<LoginPage> {
         SnackBar(content: Text('Login berhasil: $name (${role.toUpperCase()})')),
       );
 
-      // ✅ masuk ke shell sesuai role
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (_) => role == 'admin' ? const AdminShell() : const UserShell()),
