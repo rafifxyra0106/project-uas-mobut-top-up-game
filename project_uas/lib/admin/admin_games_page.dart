@@ -19,7 +19,6 @@ class _AdminGamesPageState extends State<AdminGamesPage> {
   // ✅ Session (untuk "Selamat datang")
   String _name = 'Admin';
 
-  // ✅ Search (kayak HomePage)
   final TextEditingController _searchC = TextEditingController();
   List<dynamic> _filtered = [];
 
@@ -36,7 +35,6 @@ class _AdminGamesPageState extends State<AdminGamesPage> {
     super.dispose();
   }
 
-  // ✅ ambil nama dari SharedPreferences
   Future<void> _loadSession() async {
     final n = await SessionService.getName();
     if (!mounted) return;
@@ -50,7 +48,7 @@ class _AdminGamesPageState extends State<AdminGamesPage> {
       if (!mounted) return;
       setState(() {
         games = data;
-        _filtered = data; // ✅ default tampil semua
+        _filtered = data; 
       });
     } catch (e) {
       if (!mounted) return;
@@ -62,7 +60,6 @@ class _AdminGamesPageState extends State<AdminGamesPage> {
     }
   }
 
-  // ✅ filter search
   void _applySearch(String q) {
     final query = q.trim().toLowerCase();
     if (query.isEmpty) {
@@ -161,7 +158,6 @@ class _AdminGamesPageState extends State<AdminGamesPage> {
           ),
           const SizedBox(height: 12),
 
-          // ✅ Search box
           TextField(
             controller: _searchC,
             onChanged: _applySearch,
