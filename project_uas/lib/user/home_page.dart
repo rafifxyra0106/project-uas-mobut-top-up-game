@@ -18,7 +18,6 @@ class _HomePageState extends State<HomePage> {
   String _name = 'User';
   String _role = 'user';
 
-  // optional search (kalau kamu mau)
   final TextEditingController _searchC = TextEditingController();
   List<dynamic> _filtered = [];
 
@@ -129,7 +128,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  // ✅ tambahan: header “Selamat datang, Zidan”
   Widget _header() {
     return Container(
       padding: const EdgeInsets.all(14),
