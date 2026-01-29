@@ -16,10 +16,31 @@ class _AdminGamesPageState extends State<AdminGamesPage> {
   bool loading = true;
   List<dynamic> games = [];
 
+  // ✅ Session (untuk "Selamat datang")
+  String _name = 'Admin';
+
+  // ✅ Search (kayak HomePage)
+  final TextEditingController _searchC = TextEditingController();
+  List<dynamic> _filtered = [];
+
   @override
   void initState() {
     super.initState();
+    _loadSession();
     loadGames();
+  }
+
+  @override
+  void dispose() {
+    _searchC.dispose();
+    super.dispose();
+  }
+
+  // ✅ ambil nama dari SharedPreferences
+  Future<void> _loadSession() async {
+    final n = await SessionService.getName();
+    if (!mounted) return;
+    setState(() => _name = n);
   }
 
   Future<void> loadGames() async {
@@ -27,7 +48,10 @@ class _AdminGamesPageState extends State<AdminGamesPage> {
     try {
       final data = await api.fetchGames();
       if (!mounted) return;
-      setState(() => games = data);
+      setState(() {
+        games = data;
+        _filtered = data; // ✅ default tampil semua
+      });
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
@@ -36,6 +60,23 @@ class _AdminGamesPageState extends State<AdminGamesPage> {
     } finally {
       if (mounted) setState(() => loading = false);
     }
+  }
+
+  // ✅ filter search
+  void _applySearch(String q) {
+    final query = q.trim().toLowerCase();
+    if (query.isEmpty) {
+      setState(() => _filtered = games);
+      return;
+    }
+
+    final out = games.where((x) {
+      final g = (x as Map).cast<String, dynamic>();
+      final name = (g['name'] ?? '').toString().toLowerCase();
+      return name.contains(query);
+    }).toList();
+
+    setState(() => _filtered = out);
   }
 
   Future<void> goAdd() async {
@@ -67,8 +108,14 @@ class _AdminGamesPageState extends State<AdminGamesPage> {
         title: const Text('Hapus game?'),
         content: Text('Yakin hapus "$name"?'),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('Batal')),
-          ElevatedButton(onPressed: () => Navigator.pop(ctx, true), child: const Text('Hapus')),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Batal'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: const Text('Hapus'),
+          ),
         ],
       ),
     );
@@ -77,7 +124,7 @@ class _AdminGamesPageState extends State<AdminGamesPage> {
 
     try {
       final userId = await SessionService.getUserId(); // ✅ ambil userId admin
-      await api.deleteGame(userId: userId, id: id);    // ✅ kirim ke API
+      await api.deleteGame(userId: userId, id: id); // ✅ kirim ke API
       if (!mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -90,6 +137,44 @@ class _AdminGamesPageState extends State<AdminGamesPage> {
         SnackBar(content: Text('Gagal hapus game: $e')),
       );
     }
+  }
+  
+  Widget _sessionCard() {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: const Color(0x11000000)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Admin Panel',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Selamat datang, $_name',
+            style: const TextStyle(color: Colors.black54),
+          ),
+          const SizedBox(height: 12),
+
+          // ✅ Search box
+          TextField(
+            controller: _searchC,
+            onChanged: _applySearch,
+            decoration: InputDecoration(
+              hintText: 'Cari game...',
+              prefixIcon: const Icon(Icons.search),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+              isDense: true,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -108,10 +193,12 @@ class _AdminGamesPageState extends State<AdminGamesPage> {
         onRefresh: loadGames,
         child: ListView.separated(
           padding: const EdgeInsets.all(12),
-          itemCount: games.length,
+          itemCount: _filtered.length + 1, 
           separatorBuilder: (_, __) => const SizedBox(height: 10),
           itemBuilder: (_, i) {
-            final g = (games[i] as Map).cast<String, dynamic>();
+            if (i == 0) return _sessionCard();
+
+            final g = (_filtered[i - 1] as Map).cast<String, dynamic>();
             final id = (g['id'] as num).toInt();
             final name = (g['name'] ?? '-').toString();
             final imageUrl = (g['image_url'] ?? '').toString();
@@ -133,11 +220,13 @@ class _AdminGamesPageState extends State<AdminGamesPage> {
                         : Image.network(
                       imageUrl,
                       fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => const Icon(Icons.broken_image),
+                      errorBuilder: (_, __, ___) =>
+                      const Icon(Icons.broken_image),
                     ),
                   ),
                 ),
-                title: Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
+                title: Text(name,
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
                 subtitle: Text('ID: $id'),
                 trailing: Wrap(
                   spacing: 6,
