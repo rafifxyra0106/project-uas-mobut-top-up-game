@@ -29,7 +29,6 @@ class _UserShellState extends State<UserShell> {
     HelpPage(),
   ];
 
-  // ✅ tambahan: session check + welcome (muncul sekali)
   bool _checkedSession = false;
   bool _welcomed = false;
 
@@ -84,7 +83,6 @@ class _UserShellState extends State<UserShell> {
 
   @override
   Widget build(BuildContext context) {
-    // ✅ tambahan: tunggu session check dulu
     if (!_checkedSession) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
