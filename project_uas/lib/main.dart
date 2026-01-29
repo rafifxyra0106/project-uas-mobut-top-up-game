@@ -14,7 +14,7 @@ class TopUpGameApp extends StatelessWidget {
       title: 'TopUp Game',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true),
-      home: const LandingPage(), // ✅ selalu landing tiap buka app
+      home: const LandingPage(), 
     );
   }
 }
