@@ -70,13 +70,12 @@ class _AdminEditGamePageState extends State<AdminEditGamePage> {
     setState(() => saving = true);
 
     try {
-      final userId = await SessionService.getUserId(); // ✅ ambil userId admin
-
+      final userId = await SessionService.getUserId(); 
       await api.updateGame(
         userId: userId,
         id: widget.id,
         name: name,
-        imageFile: newImage, // ✅ optional
+        imageFile: newImage, 
       );
 
       if (!mounted) return;
