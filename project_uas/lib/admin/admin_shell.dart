@@ -18,8 +18,6 @@ class _AdminShellState extends State<AdminShell> {
 
   bool checking = true;
   bool allowed = false;
-
-  // ✅ tambahan: welcome hanya sekali
   bool _welcomed = false;
 
   @override
@@ -35,7 +33,6 @@ class _AdminShellState extends State<AdminShell> {
       checking = false;
     });
 
-    // ✅ tambahan: kalau admin valid, tampilkan welcome dialog sekali
     if (allowed && !_welcomed) {
       _welcomed = true;
 
